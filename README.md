@@ -30,3 +30,6 @@ APIs: Google Cloud Translate (https://cloud.google.com/translate/docs/translatin
 5     [*] Collect Metrics on translation / Document
 6      [*] Push Translated & Analyzed file back to sNOW
 ```
+
+### Cloud DLP Example Findings ###
+![](https://i.imgur.com/DcCp0X2.png)
