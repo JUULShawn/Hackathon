@@ -34,12 +34,11 @@ def translate_text(obj, target_languages):
                     print(elem.text)
                     print(e)
                     continue
-                # elem.text = translation['translatedText']
-                # encoded_translation = translation['translatedText'].encode("UTF-8")
-                # elem.text = encoded_translation
-        # obj.write(lang + ".xml")
-        # language_output[lang] = text_obj
-        # text_obj = temp_text_obj
+                encoded_translation = translation['translatedText'].encode("UTF-8")
+                elem.text = encoded_translation
+        obj.write(lang + ".xml")
+        language_output[lang] = text_obj
+        text_obj = temp_text_obj
 
 # def translate_line(line, language):
 #     try:
