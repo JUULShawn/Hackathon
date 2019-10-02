@@ -32,4 +32,4 @@ APIs: Google Cloud Translate (https://cloud.google.com/translate/docs/translatin
 ```
 
 ### Cloud DLP Example Findings ###
-![](https://i.imgur.com/DcCp0X2.png)
+![](https://i.imgur.com/vKe1izu.png)
