@@ -8,7 +8,7 @@ import xml.etree.ElementTree as ET
 import six
 #Initializing Global translate object
 TRANSLATE_CLIENT = translate.Client()
-INCLUDED_TAGS = {"description", "meta", "short_description", "text"}
+INCLUDED_TAGS = {"description", "meta", "short_description"}
 
 
 def translate_text(obj, target_languages):
@@ -17,28 +17,32 @@ def translate_text(obj, target_languages):
     """
     language_output = {}
     text_obj = obj.getroot()
-    encoded_translation = ""
+    #setting temp text object so that I can reinitialize the temp object when I finish with a language
     temp_text_obj = text_obj
     for lang in target_languages:
         for elem in text_obj.iter():
+            #runs a function to traverse 
             if(elem.tag == "text"):
+                #where parse_html functionis going to be called
                 pass
             elif(elem.tag in INCLUDED_TAGS):
                 try:
+                    #google translate api call to translate elements in xml if it is included in tags we need to edit
                     translation = TRANSLATE_CLIENT.translate(
                         str(elem.text),
                         target_language=target_languages[lang],
                         model=translate.BASE
                     )
                 except Exception as e:
-                    print(elem.text)
-                    print(e)
+                    # print(elem.text)
+                    # print(e)
                     continue
-                encoded_translation = translation['translatedText'].encode("UTF-8")
-                elem.text = encoded_translation
-        obj.write(lang + ".xml")
+                elem.text = str(translation["translatedText"].encode("UTF-8"))
+            print(elem.text)
+        # obj.write(lang + ".xml")
         language_output[lang] = text_obj
         text_obj = temp_text_obj
+    return(language_output)
 
 # def translate_line(line, language):
 #     try:
@@ -56,16 +60,19 @@ def parse_html(text):
     """
     parses html and edits the xml files
     """
+    pass
 
 def read_cloud_storage_buckets():
     """
     read cloud storage buckets 
     """
+    pass
 
 def parse_xml(text_obj):
     """
     test for parsing xml objects
     """
+    #iterating through each tag
     for elem in text_obj.iter():
         if(elem.tag in INCLUDED_TAGS):
             print(elem.text)
@@ -79,6 +86,8 @@ def get_langauges():
 if __name__ == "__main__":
     #target langauges :French, Korean, German,
     #Polish, Russian, Spanish, Italian and Hebrew.
+
+    # what cloud translate api recognizes languages as 
     LANGUAGES = {
         "French" : "fr",
         "Korean" : "ko",
